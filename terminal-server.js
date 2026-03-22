@@ -8,11 +8,15 @@ const os = require("os");
 
 const PORT = 3001;
 
-// Shell configuration — CHANGE THIS LINE to connect to Kali Linux via Docker:
-// const shell = "docker";
-// const shellArgs = ["exec", "-it", "kali-container", "/bin/bash"];
-const shell = os.platform() === "win32" ? "powershell.exe" : "/bin/zsh";
-const shellArgs = ["--login"];
+const useKali = process.env.KALI === "true";
+const shell = useKali ? "docker" : os.platform() === "win32" ? "powershell.exe" : "/bin/zsh";
+const shellArgs = useKali ? ["exec", "-it", "codevibe-kali", "/bin/zsh"] : ["--login"];
+
+if (useKali) {
+  console.log("\\x1b[36m⚡ Bridging Terminal to Kali Linux Docker Container...\\x1b[0m");
+} else {
+  console.log("\\x1b[36m⚡ Bridging Terminal to Local Host Shell...\\x1b[0m");
+}
 
 const wss = new WebSocketServer({ port: PORT });
 

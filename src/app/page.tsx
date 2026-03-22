@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Editor, { Vulnerability } from "@/components/Editor";
 import AIPanel from "@/components/AIPanel";
-import ExploitPanel from "@/components/ExploitPanel";
+import ToolsPanel from "@/components/ToolsPanel";
 import ScanResults from "@/components/ScanResults";
 import TerminalPanel from "@/components/TerminalPanel";
 import { fileContents } from "@/utils/constants";
@@ -161,7 +161,7 @@ export default function Home() {
             onFix={handleFix}
             onJumpToLine={handleJumpToLine}
           />
-          <ExploitPanel code={liveCode} />
+          <ToolsPanel />
           <TerminalPanel isVisible={showTerminal} />
         </div>
 

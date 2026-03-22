@@ -69,22 +69,27 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🔌 Connecting to Kali Linux
+## 🔌 Connecting to Kali Linux (Real Tools)
 
 By default, the IDE terminal connects to your host machine's shell (`/bin/zsh`) for ease of development. 
 
-To bridge the IDE terminal into a real **Kali Linux** Docker container:
+To bridge the IDE terminal into a real **Kali Linux** Docker container that has `nmap`, `sqlmap`, `hydra`, `ffuf`, and `zaproxy` pre-installed:
 
-1. Start a Kali container: 
+1. Build and start the custom Kali container:
    ```bash
-   docker run -d --name kali-container -it kalilinux/kali-rolling /bin/bash
+   npm run kali:up
    ```
-2. Open `terminal-server.js` and uncomment the Docker lines:
-   ```javascript
-   const shell = "docker";
-   const shellArgs = ["exec", "-it", "kali-container", "/bin/bash"];
+2. Start the Terminal Server bridged into Kali:
+   ```bash
+   npm run terminal:kali
    ```
-3. Restart `node terminal-server.js`. The IDE terminal will now inject directly into Kali!
+3. Refresh the IDE browser page. Your IDE terminal is now rooted inside the Kali container, and tools like `nmap` and `sqlmap` will work natively with the files in your project!
+
+To stop the Kali container when you're done:
+   ```bash
+   npm run kali:down
+   ```
+
 
 ## 📜 License
 

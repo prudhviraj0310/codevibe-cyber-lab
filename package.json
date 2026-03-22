@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "kali:up": "cd kali && docker-compose up -d --build",
+    "kali:down": "cd kali && docker-compose down",
+    "terminal:local": "node terminal-server.js",
+    "terminal:kali": "KALI=true node terminal-server.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  kali:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: codevibe-kali
+    volumes:
+      - .:/root/workspace
+    working_dir: /root/workspace
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    restart: unless-stopped
+    command: /usr/bin/tail -f /dev/null # Keep it running forever
