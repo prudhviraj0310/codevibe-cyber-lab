@@ -21,6 +21,30 @@ export async function POST(req: Request) {
       prompt = "You are a security-focused code generator.\nGenerate code based on the following instruction.\nReturn ONLY the code, no explanations, no markdown fences.\n\nInstruction: " + instruction + (code ? "\n\nContext:\n" + code : "");
     } else if (mode === "edit") {
       prompt = "You are a code editor. Edit the following code based on the instruction.\nReturn ONLY the modified code, no explanations, no markdown fences.\n\nInstruction: " + instruction + "\n\nCode:\n" + code;
+    } else if (mode === "autopilot") {
+      prompt = [
+        "You are an elite, autonomous CTF and Pentesting Agent.",
+        "The user has provided a target URL or IP.",
+        "Your task is to write a highly effective, sequential bash script that executes a complete 4-phase penetration test.",
+        "The script must follow this exact methodology:",
+        "Phase 1: Setup & Reconnaissance - Run `nmap` to discover open ports and services.",
+        "Phase 2: Web Fuzzing - If port 80/443 is open, run `ffuf` or `zaproxy` to find hidden endpoints/directories.",
+        "Phase 3: Auth Cracking - If SSH, FTP, or a hidden login is found, run `hydra` to brute-force credentials using a standard wordlist.",
+        "Phase 4: Database Infiltration - Run `sqlmap` against the URL to find SQL injections and dump the database.",
+        "Output all findings neatly to the terminal with echo statements dividing the phases.",
+        "Return ONLY the raw, executable bash script code. Do not include markdown formatting or explanations.",
+        "",
+        "Target/Instruction: " + instruction,
+      ].join("\n");
+
+      const text = await callAI(prompt);
+      // Remove any markdown just in case the AI ignored instructions
+      const cleanedScript = text.replace(/^```bash?\s*/i, "").replace(/^```\s*/, "").replace(/\s*```$/i, "").trim();
+      
+      return NextResponse.json({
+        script: cleanedScript,
+        explanation: "Auto-pilot script generated.",
+      });
     } else if (mode === "command") {
       prompt = [
         "You are an ethical hacking terminal assistant. Convert the user's request into a terminal command.",
