@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f172a;
+  --foreground: #e2e8f0;
+  --panel: #020617;
+  --border: #1e293b;
+  --accent: #38bdf8;
+  --accent-dim: #0ea5e9;
+  --text-muted: #94a3b8;
+  --hover: #1e293b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-text-muted: var(--text-muted);
+  --color-hover: var(--hover);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.3);
+  color: #f8fafc;
+}
+
+/* Smooth transitions */
+.transition-panel {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glow effect for accent elements */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+/* Pulse animation for status indicators */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Monaco editor vulnerability decorations */
+.vuln-line-high {
+  background: rgba(239, 68, 68, 0.12) !important;
+  border-left: 3px solid rgba(239, 68, 68, 0.7) !important;
+}
+
+.vuln-line-medium {
+  background: rgba(245, 158, 11, 0.1) !important;
+  border-left: 3px solid rgba(245, 158, 11, 0.6) !important;
+}
+
+.vuln-line-low {
+  background: rgba(59, 130, 246, 0.08) !important;
+  border-left: 3px solid rgba(59, 130, 246, 0.5) !important;
+}
+
+.vuln-glyph-high {
+  background: rgba(239, 68, 68, 0.8);
+  border-radius: 50%;
+  margin-left: 4px;
+  width: 8px !important;
+  height: 8px !important;
+  margin-top: 6px;
+}
+
+.vuln-glyph-medium {
+  background: rgba(245, 158, 11, 0.8);
+  border-radius: 50%;
+  margin-left: 4px;
+  width: 8px !important;
+  height: 8px !important;
+  margin-top: 6px;
+}
+
+.vuln-glyph-low {
+  background: rgba(59, 130, 246, 0.7);
+  border-radius: 50%;
+  margin-left: 4px;
+  width: 8px !important;
+  height: 8px !important;
+  margin-top: 6px;
+}
