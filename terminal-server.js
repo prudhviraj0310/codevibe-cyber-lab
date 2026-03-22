@@ -29,7 +29,7 @@ wss.on("connection", (ws) => {
     name: "xterm-256color",
     cols: 120,
     rows: 30,
-    cwd: process.env.HOME || "/tmp",
+    cwd: process.cwd(), // Starts terminal in the project workspace
     env: {
       ...process.env,
       TERM: "xterm-256color",
